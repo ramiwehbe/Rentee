@@ -42,17 +42,24 @@ $(document).ready(function(){
 
     $(document).on('click', '#rent-button', function(e){
         e.preventDefault();
-        console.log("Rental Item clicked: ",$(this).data('id'));
-        console.log("clicked");
         $(this).text("Already Booked");
+        //console.log("rented status: ", $(this).parent);
         //set this in session variable to put in your cart
+        //console.log("Index Logged Inside: ",$(this).attr('data-id'))
         let toStore = $(this).data('id'); 
+        //console.log ("to Store inside: ",$(this));
         //Build a string separated by commas 
         if(sessionStorage.getItem("cart") !== null){
             toStore = toStore + ',' + sessionStorage.getItem("cart")
         }
         sessionStorage.setItem("cart", toStore);
-        console.log("to store inside: ", toStore);
+        //console.log("to store inside: ", toStore);
+        let rentUpdateURL = '/api/products/id/' + $(this).attr('data-id');
+        console.log("rentedUpdateURL: ", rentUpdateURL);
+        $.ajax(rentUpdateURL, {method: 'PUT'})
+          .then(function(response){
+            console.log(response);
+          })
         $('#modal').modal('show');
     })
     $(document).on('click', '#proceed-to-checkout', function(e){ 
@@ -119,6 +126,8 @@ function displayProducts(body){
     //Loop through body of response and create a card for each item and append it to the element div 
     $('#product-content').empty();
     body.forEach(element => {
+        console.log("Rented status: ", element);
+        if(!element.rented){
         let productCard = 
         `
         <div class="product-card">
@@ -134,7 +143,9 @@ function displayProducts(body){
         </div>
         </div>
         `;
-        $('#product-content').append(productCard);
+        $('#product-content').prepend(productCard);
+        }
+        
     
     });
 

@@ -87,7 +87,7 @@ module.exports = function(app) {
   });
 
   // app.delete("/api/deleteProducts/:id", function(req, res) {
-  //   db.Cart.destroy({
+  //   db.Product.destroy({
   //     where: {
   //       id: req.params.id
   //     }
@@ -96,17 +96,31 @@ module.exports = function(app) {
   //   });
   // });
   // PUT route for updating posts
- /*app.put("/api/products/:name", function(req, res) {
-    db.Product.update(
-      req.body,
-      {
+  app.put("/api/products/id/:id", function(req, res) {
+    db.Product.update({
+        rented: true
+      },{
         where: {
-          name: req.body.name
+          id: req.params.id
         }
       }).then(function(dbProduct) {
+        
       res.json(dbProduct);
     });
-  });*/
+  });
+
+  app.put("/api/products/:id", function(req, res) {
+    db.Product.update({
+        rented: false
+      },{
+        where: {
+          id: req.params.id
+        }
+      }).then(function(dbProduct) {
+        
+      res.json(dbProduct);
+    });
+  });
 };
 
 // let express = require('express');

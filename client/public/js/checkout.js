@@ -39,12 +39,18 @@ window.onload = function() {
         console.log("Remove Item Index is: ", deleteItemBtns[i].getAttribute("index") );
         total-=priceArray[i];
         $('#order-total').text(`$${total}`);
-        $(this).parent().parent().remove(); 
-        let delurl = '/api/deleteProducts/id/'+ selectedProducts[i];
-        $.ajax(delurl, {method: 'DELETE'})
-          .then(function(response){ 
+        $(this).parent().parent().remove();
+        let removeFromCartURL = '/api/products/' + selectedProducts[i];
+        console.log("removeFromCartURL: ", removeFromCartURL);
+        $.ajax(removeFromCartURL, {method: 'PUT'})
+          .then(function(response){
             console.log(response);
           })
+        // let delurl = '/api/deleteProducts/id/'+ selectedProducts[i];
+        // $.ajax(delurl, {method: 'DELETE'})
+        //   .then(function(response){ 
+        //     console.log(response);
+        //   })
       })
       
     }) 

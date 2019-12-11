@@ -40,11 +40,16 @@ module.exports = function(sequelize, DataTypes) {
           type: DataTypes.STRING,
           allowNull: false
       },
-      rented:{
+      rented: {
         type: DataTypes.BOOLEAN,
-        default: "false"
+        defaultValue: false,
+        allowNull: false,
+        set: function(value) {
+          if (value === 'true') value = true;
+          if (value === 'false') value = false;
+          this.setDataValue('rented', value);
+        }
       }
-
     });
   
     Product.associate = function(models) {
