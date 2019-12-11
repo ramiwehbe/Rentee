@@ -39,8 +39,8 @@ module.exports = function(app) {
   app.get("/checkout", function(req, res) {
     res.sendFile(path.join(__dirname, "../client/public/html/checkout.html"));
   });
-  app.get("/manageProducts", function(req, res) {
-    res.sendFile(path.join(__dirname, "../client/public/html/manageProducts.html"));
-  });
+  // app.get("/manageProducts", function(req, res) {
+  //   res.sendFile(path.join(__dirname, "../client/public/html/manageProducts.html"));
+  // });
 };
 

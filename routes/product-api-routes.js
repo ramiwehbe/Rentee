@@ -86,15 +86,15 @@ module.exports = function(app) {
     });
   });
 
-  app.delete("/api/deleteProducts/:id", function(req, res) {
-    db.Cart.destroy({
-      where: {
-        id: req.params.id
-      }
-    }).then(function(dbProduct) {
-      res.json(dbProduct);
-    });
-  });
+  // app.delete("/api/deleteProducts/:id", function(req, res) {
+  //   db.Cart.destroy({
+  //     where: {
+  //       id: req.params.id
+  //     }
+  //   }).then(function(dbProduct) {
+  //     res.json(dbProduct);
+  //   });
+  // });
   // PUT route for updating posts
  /*app.put("/api/products/:name", function(req, res) {
     db.Product.update(
