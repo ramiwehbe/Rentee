@@ -42,9 +42,9 @@ $(document).ready(function(){
 
     $(document).on('click', '#rent-button', function(e){
         e.preventDefault();
-        console.log($(this).data('id'));
+        console.log("Rental Item clicked: ",$(this).data('id'));
         console.log("clicked");
-
+        $(this).text("Already Booked");
         //set this in session variable to put in your cart
         let toStore = $(this).data('id'); 
         //Build a string separated by commas 
@@ -52,6 +52,18 @@ $(document).ready(function(){
             toStore = toStore + ',' + sessionStorage.getItem("cart")
         }
         sessionStorage.setItem("cart", toStore);
+        console.log("to store inside: ", toStore);
+        $('#modal').modal('show');
+    })
+    $(document).on('click', '#proceed-to-checkout', function(e){ 
+        e.preventDefault();
+        window.location = '/checkout';
+    })
+
+    $(document).on('click', '#modal-view-all-products', function(e){ 
+        e.preventDefault();
+        console.log('clicked');
+        window.location = '/search/all';
     })
 
 })
@@ -92,7 +104,8 @@ function retrieveCategoryProducts(cat){
     $.ajax(url, {method: 'GET'})
     .then(function(response){
         console.log("completed ajax");
-        console.log(response);
+        console.log("displaying response after search: ", response.length);
+        if(response.length)
         displayProducts(response);
         
     });
@@ -104,7 +117,7 @@ function retrieveCategoryProducts(cat){
 function displayProducts(body){
 
     //Loop through body of response and create a card for each item and append it to the element div 
-
+    $('#product-content').empty();
     body.forEach(element => {
         let productCard = 
         `

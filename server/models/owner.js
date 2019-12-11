@@ -1,142 +1,96 @@
 const bcrypt = require('bcrypt');
 
 module.exports = function(sequelize, DataTypes) {
-// let Owner = sequelize.define('Owner', {
-//     username: {
-//         type: DataTypes.STRING,
-//         unique: {
-//             args: true,
-//             message: 'Username must be unique.',
-//             fields: [sequelize.fn('lower', sequelize.col('username'))]
-//         },
-//         validate: {
-//             min: {
-//                 args: 3,
-//                 msg: 'Username must start with a letter, have no spaces, and be at least 3 characters.'
-//             },
-//             max: {
-//                 args: 20,
-//                 msg: 'Username must start with a letter, have no spaces, and be at less than 20 characters.'
-//             },
-//             is: {
-//                 args: /^[A-Za-z][A-Za-z0-9-]+$/i, // must start with letter and only have letters, numbers, dashes
-//                 msg: 'Username must start with a letter, have no spaces, and be 3 - 20 characters.'
-//             }
-//         },
-//     },
-//     email: {
-//         type: DataTypes.STRING,
-//         unique: {
-//             args: true,
-//             msg: 'Oops. Looks like you already have an account with this email address. Please try to login.',
-//             fields: [sequelize.fn('lower', sequelize.col('email'))]
-//         },
-//         validate: {
-//             isEmail: {
-//                 args: true,
-//                 msg: 'The email you entered is invalid or is already in our system.'
-//             },
-//             max: {
-//                 args: 254,
-//                 msg: 'The email you entered is invalid or longer than 254 characters.'
-//             }
-//         }
-//     },
-//     first_name: {
-//         type: DataTypes.STRING,
-//         validate: {
-//             isAlpha: true,
-//             max: {
-//                 args: 254,
-//                 msg: 'Your full name can only contain letters.'
-//             }
-//         }
-//     },
-//     last_name: {
-//         type: DataTypes.STRING,
-//         allowNull: false,
-//         validate: {
-//             isAlpha: true,
-//             max: {
-//                 args: 254,
-//                 msg: 'Your last name can only contain letters.'
-//             }
-//         }
-//     },
-//     phone: {
-//         type: DataTypes.STRING,
-//         allowNull: false,
-//         validate: {
-//             isNumeric: true,
-//             len: {
-//                 args: 10,
-//                 msg: 'Enter 10 digit phone number with no extra characters'
-//             }
-//         }
-//     }
-// }, {
-//     indexes: [{
-//         unique: true,
-//         fields: ['username', 'email']
-//     }]
-// });
-
-    let Owner = sequelize.define("Owner", {
-        email: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-              len: [1]
+let Owner = sequelize.define('Owner', {
+    username: {
+        type: DataTypes.STRING,
+        unique: {
+            args: true,
+            message: 'Username must be unique.',
+            fields: [sequelize.fn('lower', sequelize.col('username'))]
+        },
+        validate: {
+            min: {
+                args: 3,
+                msg: 'Username must start with a letter, have no spaces, and be at least 3 characters.'
+            },
+            max: {
+                args: 20,
+                msg: 'Username must start with a letter, have no spaces, and be at less than 20 characters.'
+            },
+            is: {
+                args: /^[A-Za-z][A-Za-z0-9-]+$/i, // must start with letter and only have letters, numbers, dashes
+                msg: 'Username must start with a letter, have no spaces, and be 3 - 20 characters.'
             }
         },
-        username: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-              len: [1]
-            }
+    },
+    email: {
+        type: DataTypes.STRING,
+        unique: {
+            args: true,
+            msg: 'Oops. Looks like you already have an account with this email address. Please try to login.',
+            fields: [sequelize.fn('lower', sequelize.col('email'))]
         },
-        password: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-              len: [1]
-            }
-        },
-        first_name: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-              len: [1]
-            }
-        },
-        last_name: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-              len: [1]
-            }
-        },
-        phone: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-              len: [1]
+        validate: {
+            isEmail: {
+                args: true,
+                msg: 'The email you entered is invalid or is already in our system.'
+            },
+            max: {
+                args: 254,
+                msg: 'The email you entered is invalid or longer than 254 characters.'
             }
         }
-    });
+    },
+    first_name: {
+        type: DataTypes.STRING,
+        validate: {
+            isAlpha: true,
+            max: {
+                args: 254,
+                msg: 'Your full name can only contain letters.'
+            }
+        }
+    },
+    last_name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            isAlpha: true,
+            max: {
+                args: 254,
+                msg: 'Your last name can only contain letters.'
+            }
+        }
+    },
+    phone: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            isNumeric: true,
+            len: {
+                args: 10,
+                msg: 'Enter 10 digit phone number with no extra characters'
+            }
+        }
+    }
+}, {
+    indexes: [{
+        fields: ['username', 'email']
+    }]
+});
 
-    Owner.associate = function(models) {
-        Owner.hasMany(models.Product, {
-          onDelete: "cascade"
-        });
-        Owner.hasMany(models.AuthToken);
-    };
+Owner.associate = function(models) {
+    Owner.hasMany(models.Product, {
+        onDelete: "cascade"
+    });
+    Owner.hasMany(models.AuthToken);
+};
 
      // This is a class method, it is not called on an individual
   // user object, but rather the class as a whole.
   // e.g. User.authenticate('user1', 'password1234')
-  Owner.authenticate = async function(username, password) {
+Owner.authenticate = async function(username, password) {
 
     const user = await Owner.findOne({ where: { username }});
 
