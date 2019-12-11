@@ -46,11 +46,6 @@ window.onload = function() {
           .then(function(response){
             console.log(response);
           })
-        // let delurl = '/api/deleteProducts/id/'+ selectedProducts[i];
-        // $.ajax(delurl, {method: 'DELETE'})
-        //   .then(function(response){ 
-        //     console.log(response);
-        //   })
       })
       
     }) 

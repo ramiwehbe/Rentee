@@ -1,29 +1,53 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>RENTEE</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://fonts.googleapis.com/css?family=Bungee+Inline|Lalezar|Lobster|Shrikhand" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
-        crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="../css/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Carter+One" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>RENTEE - List</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <base href="/">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+            integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+            integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" media="screen" href="../css/main.css" />
+        <link rel="stylesheet" type="text/css" media="screen" href="../css/listProducts.css" />
+        <script src="https://code.jquery.com/jquery.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+        <script src="/js/userAuth.js" type="module"></script>
+        <script src="/js/newProduct.js" type="module"></script>
+        <script src="/js/search.js" type="module"></script>
+        <script src="/js/searchResults.js" type="module"></script>
+    
 </head>
 
 <body>
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="" id="nav-font">
+            <div width="30" height="30" style="image-rendering: pixelated;" class="d-inline-block align-top">RENTEE</div>
+        </a>
+        <div class="icons">
+            <a href="/manageProducts" class="icon-block">
+                <i class="fas fa-dna"></i>
+            </a>
+            <a href="/login" class="icon-block" id="user-icon" data-status="loggedOut">
+                <i class="fas fa-user"></i>
+            </a>
+            <a href="/search" class="icon-block">
+                <i class="fas fa-search"></i>
+            </a>
+            <a href="/checkout" class="icon-block">
+                <i class="fas fa-shopping-cart"></i>
+            </a>
+        </div>
+    </nav>
     <section class="main-container">
         <div class="left-container">
             <header class="rent">REN</header>
             <p class="lefttext" id="left-text">Rent almost everything you want...</p>
             <button onclick="location.href='/search/'" type="button" class="buttonRent">RENT THE STUFF</button>
-            
-           <div id="wrapper">
+
+            <div id="wrapper">
                 <div class="bt_wrap">
                     <div class="box">
                         <i class="icon fas fa-car-side"></i>
@@ -43,53 +67,54 @@
                     </div>
                 </div>
                 <div class="bt_wrap">
-                        <div class="box">
-                            <i class="icon fas fa-user-astronaut"></i>
-                            <i class="icon2 fas fa-user-astronaut"></i>
-                        </div>
+                    <div class="box">
+                        <i class="icon fas fa-user-astronaut"></i>
+                        <i class="icon2 fas fa-user-astronaut"></i>
                     </div>
+                </div>
             </div>
-           
+
         </div>
 
-     
+
 
         <div class="right-container">
             <header class="list">TEE</header>
             <p class="righttext" id="right-text">List almost everything you want...</p>
-          
-            <button onclick="location.href='/login'" type="button" class="buttonList" href="/login">LIST YOUR STUFF</button>
+
+            <button onclick="location.href='/login'" type="button" class="buttonList" href="/login">LIST YOUR
+                STUFF</button>
 
             <div id="wrapper2">
-                    <div class="bt_wrap2">
-                        <div class="box2">
-                            <i class="icon3 fas fa-car-side"></i>
-                            <i class="icon4 fas fa-car-side"></i>
-                        </div>
+                <div class="bt_wrap2">
+                    <div class="box2">
+                        <i class="icon3 fas fa-car-side"></i>
+                        <i class="icon4 fas fa-car-side"></i>
                     </div>
-                    <div class="bt_wrap2">
-                        <div class="box2">
-                            <i class="icon3 fas fa-couch"></i>
-                            <i class="icon4 fas fa-couch"></i>
-                        </div>
-                    </div>
-                    <div class="bt_wrap2">
-                        <div class="box2">
-                            <i class="icon3 fas fa-bicycle"></i>
-                            <i class="icon4 fas fa-bicycle"></i>
-                        </div>
-                    </div>
-                    <div class="bt_wrap2">
-                            <div class="box2">
-                                <i class="icon3 fas fa-user-astronaut"></i>
-                                <i class="icon4 fas fa-user-astronaut"></i>
-                            </div>
-                        </div>
                 </div>
-            
+                <div class="bt_wrap2">
+                    <div class="box2">
+                        <i class="icon3 fas fa-couch"></i>
+                        <i class="icon4 fas fa-couch"></i>
+                    </div>
+                </div>
+                <div class="bt_wrap2">
+                    <div class="box2">
+                        <i class="icon3 fas fa-bicycle"></i>
+                        <i class="icon4 fas fa-bicycle"></i>
+                    </div>
+                </div>
+                <div class="bt_wrap2">
+                    <div class="box2">
+                        <i class="icon3 fas fa-user-astronaut"></i>
+                        <i class="icon4 fas fa-user-astronaut"></i>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
-       
+
 
     </section>
 

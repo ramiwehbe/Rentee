@@ -143,7 +143,7 @@ function displayProducts(body){
         </div>
         </div>
         `;
-        $('#product-content').prepend(productCard);
+        $('#product-content').append(productCard);
         }
         
     
