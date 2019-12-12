@@ -22,19 +22,21 @@ $(document).ready(function(){
         console.log("here");
     })	
     $(document).on('click', '#rent-button', function(e){
-        e.preventDefault();
-        $(this).text("Already Booked");
-        let toStore = $(this).data('id'); 
-        if(sessionStorage.getItem("cart") !== null){
-            toStore = toStore + ',' + sessionStorage.getItem("cart")
+        if($(this).text() !== "Already Booked"){
+            e.preventDefault();
+            $(this).text("Already Booked");
+            let toStore = $(this).data('id'); 
+            if(sessionStorage.getItem("cart") !== null){
+                toStore = toStore + ',' + sessionStorage.getItem("cart")
+            }
+            sessionStorage.setItem("cart", toStore);
+            let rentUpdateURL = '/api/products/id/' + $(this).attr('data-id');
+            console.log("rentedUpdateURL: ", rentUpdateURL);
+            $.ajax(rentUpdateURL, {method: 'PUT'})
+              .then(function(response){
+                console.log(response);
+              })
         }
-        sessionStorage.setItem("cart", toStore);
-        let rentUpdateURL = '/api/products/id/' + $(this).attr('data-id');
-        console.log("rentedUpdateURL: ", rentUpdateURL);
-        $.ajax(rentUpdateURL, {method: 'PUT'})
-          .then(function(response){
-            console.log(response);
-          })
         $('#modal').modal('show');
     })
     $(document).on('click', '#proceed-to-checkout', function(e){ 

@@ -41,6 +41,7 @@ window.onload = function() {
         $('#order-total').text(`$${total}`);
         $(this).parent().parent().remove();
         let removeFromCartURL = '/api/products/' + selectedProducts[i];
+        sessionStorage.setItem(("cart").split(',')[i],'');
         console.log("removeFromCartURL: ", removeFromCartURL);
         $.ajax(removeFromCartURL, {method: 'PUT'})
           .then(function(response){
