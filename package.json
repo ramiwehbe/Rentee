@@ -26,7 +26,7 @@
     "path": "^0.12.7",
     "popper.js": "^1.16.0",
     "require": "^2.4.20",
-    "sequelize": "^4.38.0",
+    "sequelize": "^5.15.1",
     "sequelize-cli": "^4.0.0"
   },
   "devDependencies": {
